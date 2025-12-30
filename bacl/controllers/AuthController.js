@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const Table = require('../models/Table');
 
-// REGISTER
 const register = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
@@ -50,7 +49,6 @@ const register = async (req, res) => {
   }
 };
 
-// LOGIN
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;

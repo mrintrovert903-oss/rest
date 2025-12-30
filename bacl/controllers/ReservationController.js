@@ -1,7 +1,6 @@
 const Reservation = require('../models/Reservation');
 const Table = require('../models/Table');
 
-// GET /available-tables
 const getAvailableTables = async (req, res) => {
   try {
     const { date, timeSlot, guests } = req.query;
@@ -31,7 +30,6 @@ const getAvailableTables = async (req, res) => {
   }
 };
 
-// POST /
 const createReservation = async (req, res) => {
   try {
     const { tableId, date, timeSlot, guests } = req.body;
@@ -76,7 +74,6 @@ const createReservation = async (req, res) => {
   }
 };
 
-// GET /my-reservations
 const getMyReservations = async (req, res) => {
   try {
     const reservations = await Reservation.find({
@@ -92,7 +89,6 @@ const getMyReservations = async (req, res) => {
   }
 };
 
-// DELETE /:id
 const cancelReservation = async (req, res) => {
   try {
     const reservation = await Reservation.findById(req.params.id);

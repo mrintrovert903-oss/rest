@@ -1,7 +1,6 @@
 const Reservation = require("../models/Reservation");
 const Table = require("../models/Table");
 
-// GET all reservations (admin)
 const getAllReservations = async (req, res) => {
   try {
     const reservations = await Reservation.find()
@@ -16,7 +15,6 @@ const getAllReservations = async (req, res) => {
   }
 };
 
-// GET reservations by date (admin)
 const getReservationsByDate = async (req, res) => {
   try {
     const date = new Date(req.params.date);
@@ -33,7 +31,6 @@ const getReservationsByDate = async (req, res) => {
   }
 };
 
-// CANCEL reservation (admin)
 const cancelReservationByAdmin = async (req, res) => {
   try {
     const reservation = await Reservation.findById(req.params.id);
@@ -52,7 +49,6 @@ const cancelReservationByAdmin = async (req, res) => {
   }
 };
 
-// UPDATE reservation (admin)
 const updateReservationByAdmin = async (req, res) => {
   try {
     const { date, timeSlot, guests, status } = req.body;
@@ -78,7 +74,6 @@ const updateReservationByAdmin = async (req, res) => {
   }
 };
 
-// GET all tables (admin)
 const getAllTables = async (req, res) => {
   try {
     const tables = await Table.find().sort({ tableNumber: 1 });
@@ -89,7 +84,6 @@ const getAllTables = async (req, res) => {
   }
 };
 
-// CREATE table (admin)
 const createTable = async (req, res) => {
   try {
     const { tableNumber, capacity } = req.body;
@@ -115,7 +109,6 @@ const createTable = async (req, res) => {
   }
 };
 
-// UPDATE table (admin)
 const updateTable = async (req, res) => {
   try {
     const { tableNumber, capacity } = req.body;
@@ -136,7 +129,6 @@ const updateTable = async (req, res) => {
   }
 };
 
-// DELETE table (admin)
 const deleteTable = async (req, res) => {
   try {
     const table = await Table.findById(req.params.id);
