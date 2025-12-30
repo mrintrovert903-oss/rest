@@ -26,6 +26,10 @@ connectDB();
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/reservations', require('./routes/ReservationRoutes'));
 app.use('/api/admin', require('./routes/admin'));
+app.use(cors({
+  origin: 'https://rest-frontend-three.vercel.app/', // replace with your frontend URL
+  credentials: true
+}));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
