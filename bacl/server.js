@@ -27,7 +27,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/reservations', require('./routes/ReservationRoutes'));
 app.use('/api/admin', require('./routes/admin'));
 app.use(cors({
-  origin: 'https://rest-frontend-three.vercel.app/', // replace with your frontend URL
+  origin: 'https://rest-frontend-three.vercel.app', // replace with your frontend URL
   credentials: true
 }));
 
