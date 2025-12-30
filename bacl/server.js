@@ -1,3 +1,40 @@
+// const express = require('express');
+// const mongoose = require('mongoose');
+// const cors = require('cors');
+// require('dotenv').config();
+
+// const app = express();
+
+// // Middleware
+// app.use(cors());
+// app.use(express.json());
+
+// // Connect to MongoDB
+// const connectDB = async () => {
+//   try {
+//     await mongoose.connect(process.env.MONGO_URI);
+//     console.log('MongoDB connected');
+//   } catch (err) {
+//     console.error(err.message);
+//     process.exit(1);
+//   }
+// };
+
+// connectDB();
+
+// // Routes
+// app.use('/api/auth', require('./routes/auth'));
+// app.use('/api/reservations', require('./routes/ReservationRoutes'));
+// app.use('/api/admin', require('./routes/admin'));
+// app.use(cors({
+//   origin: 'https://rest-frontend-three.vercel.app', // replace with your frontend URL
+//   credentials: true
+// }));
+
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -5,8 +42,25 @@ require('dotenv').config();
 
 const app = express();
 
-// Middleware
-app.use(cors());
+// Allowed origins for CORS
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'https://rest-frontend-three.vercel.app'
+];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(null, true); // allow instead of crashing
+    }
+  },
+  credentials: true
+}));
+
+// Body parser
 app.use(express.json());
 
 // Connect to MongoDB
@@ -22,14 +76,11 @@ const connectDB = async () => {
 
 connectDB();
 
-// Routes
+// Routes (after CORS!)
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/reservations', require('./routes/ReservationRoutes'));
 app.use('/api/admin', require('./routes/admin'));
-app.use(cors({
-  origin: 'https://rest-frontend-three.vercel.app', // replace with your frontend URL
-  credentials: true
-}));
 
+// Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
