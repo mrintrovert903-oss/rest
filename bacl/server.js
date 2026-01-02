@@ -44,21 +44,23 @@ const app = express();
 
 // Allowed origins for CORS
 const allowedOrigins = [
-  // 'http://localhost:3000',
-  // 'http://localhost:5173',
+  'http://localhost:3000',
+  'http://localhost:5173',
   'https://rest-frontend-three.vercel.app',
-   'https://rest-frontend-3ddgx4r68-haris-projects-6746e7af.vercel.app'
+  'https://rest-frontend-3ddgx4r68-haris-projects-6746e7af.vercel.app'
 ];
 
 app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
     } else {
-      callback(null, true); 
+      return callback(new Error('Not allowed by CORS'));
     }
   },
-  credentials: true
+  credentials: true,
 }));
 
 
