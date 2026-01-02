@@ -46,7 +46,8 @@ const app = express();
 const allowedOrigins = [
   // 'http://localhost:3000',
   // 'http://localhost:5173',
-  'https://rest-frontend-three.vercel.app'
+  'https://rest-frontend-three.vercel.app',
+   'https://rest-frontend-3ddgx4r68-haris-projects-6746e7af.vercel.app'
 ];
 
 app.use(cors({
